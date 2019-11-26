@@ -1,0 +1,22 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: checkout stage
+      uses: actions/checkout@v1
+      with:
+        ref: ci-stage-server
+    - name: merge
+      run: git merge master -m "Merge branch 'master' into ci-stage-server"
+    - name: push
+      run: git push
