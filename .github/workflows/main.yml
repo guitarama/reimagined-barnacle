@@ -17,6 +17,8 @@ jobs:
       with:
         ref: ci-stage-server
     - name: merge
-      run: git merge master -m "Merge branch 'master' into ci-stage-server"
+      env:
+        GITHUB_SHA: ${{ github.sha }}
+      run: git merge $GITHUB_SHA -m "Merge branch 'master' into ci-stage-server"
     - name: push
       run: git push
