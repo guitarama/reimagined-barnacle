@@ -25,3 +25,13 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         branch: ci-stage-server
+    - name: The job has failed
+      if: failure()
+      uses: drilonrecica/action-slack-notify@0.0.3
+      env:
+        SLACK_COLOR: '#D00000'
+        SLACK_ICON: https://github.com/guitarama.png?size=48
+        SLACK_MESSAGE: 'Failed to merge `master` to `ci-stage-server` :boom:'
+        SLACK_TITLE: Merge Failure!
+        SLACK_USERNAME: github
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
